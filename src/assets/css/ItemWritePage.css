@@ -1,0 +1,39 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+/* 전체 페이지 스타일 */
+.itemWritePage {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+}
+
+/* 게시물 등록 컴포넌트 스타일 */
+.itemWritePage .itemWriteWrap {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .itemWritePage {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .itemWritePage .itemWriteWrap {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .itemWritePage {
+    padding: 10px;
+  }
+
+  .itemWritePage .itemWriteWrap {
+    padding: 15px;
+  }
+}

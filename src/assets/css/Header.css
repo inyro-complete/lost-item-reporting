@@ -1,0 +1,50 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+.header-container {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-left-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.header-right-wrap {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 480px) {
+  .header-wrap {
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-button {
+    font-size: 14px;
+  }
+
+  .header-right-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+  }
+}

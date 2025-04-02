@@ -1,0 +1,99 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+
+.page {
+  max-width: 1440px;
+  min-height: 100vh;
+  background: #ffffff;
+  margin: 0 auto;
+  padding: 20px;
+  display: block;
+}
+
+/* 상단 타이틀 */
+.titleWrap {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  color: #000000;
+}
+
+/* 입력 영역 전체 */
+.contentWrap {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 입력 필드 제목 */
+.inputTitle {
+  font-size: 17px;
+  margin-bottom: 6px;
+  color: #333;
+  padding-top: 10px;
+}
+
+/* 입력 필드 */
+.inputWrap {
+  margin-bottom: 16px;
+}
+
+/* 입력칸 */
+.input {
+  width: 100%;
+  height: 40px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 에러메세지 */
+.errorMessageWrap {
+  color: #ef0000;
+  font-size: 15px;
+  margin-top: -4px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+/* 로그인 버튼 */
+.bottomButton {
+  width: 33%;
+  height: 45px;
+  color: white;
+  background-color: #0E207F;
+  font-size: 17px;
+  border: none;
+  border-radius: 6px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 회원가입 링크 */
+.footerLinks {
+  text-align: center;
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* 반응형 */
+@media screen and (max-width: 480px) {
+  .page {
+    padding: 24px 16px;
+  }
+
+  .titleWrap {
+    font-size: 18px;
+  }
+
+  .input {
+    font-size: 14px;
+  }
+
+  .bottomButton {
+    font-size: 15px;
+  }
+}

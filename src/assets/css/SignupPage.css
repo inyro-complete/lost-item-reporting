@@ -1,0 +1,69 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+.signupWrap {
+  display: flex;
+  max-width: 400px;
+  margin: 0 auto;  
+  padding: 20px;  
+  background-color: #fff;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 회원가입 title */
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* 입력칸 */
+.signupWrap input {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 중복체크 버튼 */
+.signupWrap button[type="button"]{
+  width: 100px;
+  height: 25px;
+  margin-bottom: 20px;
+  background-color: #0E207F;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+/* 가입하기 버튼 */
+.signupWrap button[type="submit"] {
+  width: 427px;
+  height: 43px;
+  color: #fff;
+  background-color: #0E207F;
+  font-size: 17px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* 에러 메시지 */
+.error {
+  color: #ef0000;
+  font-size: 15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+p {
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+}
+
