@@ -1,8 +1,17 @@
 // src/components/Main.js
 import React from 'react';
 import SearchBar from './SearchBar';
+import {useNavigate} from "react-router-dom";
+import { mockLostItems, mockFoundItems} from "../services/mockData";
+import LostItemPreview from "./Item/LostItemPreview";
+import FoundItemPreview from "./Item/FoundItemPreview";
 
 export default function Main({ onNavigate }) {
+  const navigate = useNavigate();
+
+  const foundPreview = mockFoundItems.slice(0, 10)
+  const lostPreview = mockLostItems.slice(0, 10)
+
   const handleSearch = (keyword) => {
     console.log('검색어:', keyword)
     // 나중에 API 요청 (안에 axios.get() 추가 하면 될 듯?
@@ -10,22 +19,33 @@ export default function Main({ onNavigate }) {
 
   return (
       <>
-
         <main className="main-content">
           <section className="category-section">
-            <h2>#주인 찾아요!</h2>
+            <h2 onClick={() => {
+              navigate('/found')
+            }}
+            style = {{
+              cursor: 'pointer',
+            }}
+            >#주인 찾아요!</h2>
             <button onClick={() => onNavigate('/found')}>
               습득물 게시판 바로가기
             </button>
-            습득물이 카드 형식으로 보여질 예정
+            <FoundItemPreview items={foundPreview}/>
           </section>
 
           <section className="category-section">
-            <h2>#잃어버리셨나요?</h2>
+            <h2 onClick={() => {
+              navigate('/lost')
+            }}
+            style = {{
+              cursor: 'pointer',
+            }}
+            >#잃어버리셨나요?</h2>
             <button onClick={() => onNavigate('/lost')}>
               분실물 게시판 바로가기
             </button>
-            분실물 카드 형식으로 보여질 예정
+            <LostItemPreview items={lostPreview}/>
           </section>
         </main>
       </>

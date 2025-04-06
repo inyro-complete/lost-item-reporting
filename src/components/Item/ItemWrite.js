@@ -86,23 +86,23 @@ export default function ItemWrite({type}) {
         <form onSubmit={handleSubmit}>
           { /* 날짜 */}
           <input
-            className="itemInput1"
-            id="date"
-            type="date"
-            value={date}
-            onChange={(e) => {
-              setDate(e.target.value)
-            }}
+              className="itemInput1"
+              id="date"
+              type="date"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value)
+              }}
           />
 
           {/* 글머리 (찾는중or찾기완료)*/}
           <select
-            className="itemSelect"
-            id="status"
-            value={status}
-            onChange={(e) => {
-              setStatus(e.target.value)
-            }}>
+              className="itemSelect"
+              id="status"
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value)
+              }}>
 
             <option value="찾는 중">찾는중</option>
             <option value="찾기 완료">찾기 완료</option>
@@ -110,28 +110,28 @@ export default function ItemWrite({type}) {
 
           {/* 제목 적는 칸 */}
           <input
-            className ="itemInput2"
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="제목"
+              className ="itemInput2"
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="제목"
           />
           {/* 본문 */}
           <ReactQuill
-            className="itemEditor"
-            value={content}
-            onChange={setContent}
-            // ReactQill은 일반 input이 아니라서 그냥 value로 넣음
+              className="itemEditor"
+              value={content}
+              onChange={setContent}
+              // ReactQill은 일반 input이 아니라서 그냥 value로 넣음
           />
 
           {/* 위치 */}
           {/*드롭다운 메뉴 만들기*/}
           <select
-            className="itemLocation"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+              className="itemLocation"
+              id="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
           >
             <option value="">-- 위치 선택 --</option> {/* 기본 안내 문구*/}
             {/* loc: 배열 안의 아이템들, i: index */}
@@ -145,9 +145,9 @@ export default function ItemWrite({type}) {
           {/*파일 첨부*/}
           <label htmlFor="file" className="fileLabel">파일 첨부</label>
           <input
-            id="file"
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
+              id="file"
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
 
           />
 

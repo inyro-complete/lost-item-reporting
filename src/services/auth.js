@@ -1,7 +1,6 @@
 // services/auth.js
 import axios from 'axios'
-
-const USE_MOCK = true
+import { USE_MOCK } from '../config'
 
 // 로그인 API
 export const loginApi = async (email, password) => {
