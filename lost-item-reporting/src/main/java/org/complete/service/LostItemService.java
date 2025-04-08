@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class LostItemService {
@@ -113,4 +115,11 @@ public class LostItemService {
         // DB에 반영
         return lostItemRepository.save(lostItem);
     }
+
+//    public List<PostListResponse> findByUserId(Long userId) {
+//        List<LostItem> items = lostItemRepository.findByLoserId(userId);
+//        return items.stream()
+//                .map(PostListResponse::new)
+//                .toList();
+//    }
 }

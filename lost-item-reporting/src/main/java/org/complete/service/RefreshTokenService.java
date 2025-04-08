@@ -10,16 +10,16 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 @Service
 public class RefreshTokenService {
+
     private final RefreshTokenRepository refreshTokenRepository;
+
+    public void save(Long userId, String refreshToken) {
+        refreshTokenRepository.save(new RefreshToken(userId, refreshToken));
+    }
 
     public RefreshToken findByRefreshToken(String refreshToken) {
         return refreshTokenRepository.findByRefreshToken(refreshToken)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected token"));
-    }
-
-    public void save(Long userId, String refreshToken) {
-        refreshTokenRepository.save(new RefreshToken(userId, refreshToken));
-
     }
 
     public void delete(String refreshTokenValue) {

@@ -3,6 +3,7 @@ package org.complete.service;
 import lombok.RequiredArgsConstructor;
 import org.complete.domain.User;
 import org.complete.repository.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,6 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public User loadUserByUsername(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException(("User not found")));
+                .orElseThrow(() -> new BadCredentialsException("Invalid email or password."));
     }
 }

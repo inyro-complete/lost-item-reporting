@@ -18,6 +18,16 @@ public class TokenService {
     private final RefreshTokenService refreshTokenService;
     private final UserService userService;
 
+    // 로그인 시 액세스 토큰 생성
+    public String generateAccessToken(User user) {
+        return tokenProvider.generateToken(user, Duration.ofHours(1)); // 1시간 유효
+    }
+
+    // 로그인 시 리프레시 토큰 생성
+    public String generateRefreshToken(User user) {
+        return tokenProvider.generateToken(user, Duration.ofDays(7)); // 7일 유효
+    }
+
     public String createNewAccessToken(String refreshToken) {
         // 토큰 유효성 검사에 실패하면 예외 발생
         if(!tokenProvider.validToken(refreshToken)) {
@@ -27,7 +37,7 @@ public class TokenService {
         Long userId = refreshTokenService.findByRefreshToken(refreshToken).getUserId();
         User user = userService.findById(userId);
 
-        return tokenProvider.generateToken(user, Duration.ofHours(2));
+        return tokenProvider.generateToken(user, Duration.ofHours(1));
     }
 
     public void validateToken(String accessToken) {

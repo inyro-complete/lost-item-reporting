@@ -23,25 +23,22 @@ public class TokenProvider {
     public final JwtProperties jwtProperties;
 
     // JWT 토큰 생성 메소드
-    public String generateToken(User user, Duration expiredAt) { // 유저 정보, 만료 시간
+    public String generateToken(User user, Duration expiredAt) {
+        // 현재 시간 기준으로 토큰 만료 시간 계산
         Date now = new Date();
-        return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
-    }
+        Date expiry = new Date(now.getTime() + expiredAt.toMillis());
 
-    public String makeToken(Date expiry, User user) {
-        Date now = new Date();  // 현재 시간
-
+        // JWT 토큰 생성
         return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)  // JWT 타입 설정
-                .setIssuer(jwtProperties.getIssuer())  // 발급자 설정
-                .setIssuedAt(now)  // 발급 일시 설정
-                .setExpiration(expiry)  // 만료 일시 설정
-                .setSubject(user.getEmail())  // 주체(유저 이메일) 설정
-                .claim("id", user.getId())  // 유저 ID를 클레임에 추가
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())  // 비밀 키로 서명
-                .compact();  // 토큰 생성
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)             // 헤더에 JWT 타입 설정
+                .setIssuer(jwtProperties.getIssuer())                     // 토큰 발급자(issuer) 설정
+                .setIssuedAt(now)                                         // 토큰 발급 시간
+                .setExpiration(expiry)                                    // 토큰 만료 시간
+                .setSubject(user.getEmail())                              // 토큰 주제(subject): 유저 이메일
+                .claim("id", user.getId())                             // 커스텀 클레임: 유저 ID 포함
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey()) // HMAC-SHA256으로 서명
+                .compact();                                               // 최종 토큰 문자열로 압축
     }
-
 
     // 유효한 토큰인지 검사
     public boolean validToken(String token) {

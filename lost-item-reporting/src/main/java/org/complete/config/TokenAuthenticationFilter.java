@@ -21,16 +21,29 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter { // 요청(
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        System.out.println("=== [TokenAuthenticationFilter] 필터 진입 ===");
+
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
+        System.out.println("Authorization Header: " + authorizationHeader);
+
         String token = getAccessToken(authorizationHeader);
+        System.out.println("Access Token: " + token);
 
         if(tokenProvider.validToken(token)) {
+            System.out.println("토큰 유효함");
+
             Authentication authentication = tokenProvider.getAuthentication(token);
+            System.out.println("Authentication 객체: " + authentication);
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println("SecurityContext에 Authentication 설정 완료");
+        } else {
+            System.out.println("토큰 유효하지 않음");
         }
 
         filterChain.doFilter(request, response);
     }
+
 
     private String getAccessToken(String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith(TOKEN_PREFIX)) {

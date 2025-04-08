@@ -1,5 +1,6 @@
 package org.complete.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.complete.domain.LostItem;
 import org.complete.dto.AddLostItemRequest;
@@ -21,8 +22,9 @@ public class LostItemApiController {
     // 분실물 등록 API
     @PostMapping("/api/lost-items")
     public ResponseEntity<LostItem> addLostItem(@RequestHeader("Authorization") String authHeader,
-                                                @ModelAttribute AddLostItemRequest request) {
+                                                @Valid @ModelAttribute AddLostItemRequest request) {
 
+        System.out.println("컨트롤러 진입: " + request.getTitle() + ", " + request.getLostLocation());
         LostItem savedLostItem = lostItemService.addLostItem(authHeader, request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedLostItem);
