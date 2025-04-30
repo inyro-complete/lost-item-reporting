@@ -1,0 +1,70 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+.lost-slider-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.lost-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+.lost-card {
+  flex: 0 0 auto;
+  width: 160px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+}
+
+.lost-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.lost-card h4 {
+  font-size: 14px;
+  margin: 4px 0;
+  font-weight: bold;
+}
+
+.lost-card p {
+  font-size: 12px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.slide-button {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: #0E207F;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slide-button.left {
+  left: 0;
+}
+
+.slide-button.right {
+  right: 0;
+}

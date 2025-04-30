@@ -1,0 +1,38 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 30px auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  font-size: 16px;
+  border: 2px solid #0E207F;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #0E207F;
+}
+
+.search-button {
+  height: 45px;
+  padding: 0 20px;
+  background-color: #0E207F;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
