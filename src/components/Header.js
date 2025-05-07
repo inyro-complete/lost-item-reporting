@@ -43,7 +43,7 @@ export default function Header() {
           {/* 왼쪽: 로고 */}
           <div className="header-left-wrap">
             <Link to="/" className="logo-text">
-              <img src={smuLogo} alt="로고" style={{ width: '50px', height: 'auto' }} />
+              <img src={smuLogo} alt="로고" style={{ width: '100px', height: 'auto' }} />
             </Link>
           </div>
 

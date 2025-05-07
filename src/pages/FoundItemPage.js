@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import FoundItemBoard from '../components/Item/FoundItemBoard'
 import SearchBar from '../components/SearchBar'
 import axiosInstance from '../services/api/axiosInstance'
+import '../assets/css/FoundItemPage.css';
 
 export default function FoundItemPage() {
   const navigate = useNavigate()
@@ -40,16 +41,16 @@ export default function FoundItemPage() {
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
 
   return (
-      <div>
+      <div className='found-post'>
         <h2>#주인 찾아요!</h2>
 
-        <button onClick={() => navigate('/found/write')}>글쓰기</button>
+        <button className="write-button" onClick={() => navigate('/found/write')}>글쓰기</button>
 
         <SearchBar />
 
         <FoundItemBoard items={items} />
 
-        <div>
+        <div className="pagination">
           <button onClick={() => setPage(1)} disabled={page === 1}>
             {'<<'}
           </button>
