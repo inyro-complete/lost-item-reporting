@@ -1,0 +1,35 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+/* 메인 전체 레이아웃 */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* 섹션 (습득물 / 분실물) */
+.category-section {
+  margin-bottom: 60px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 10px;
+}
+
+.category-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.category-section button {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background-color: #0E207F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
