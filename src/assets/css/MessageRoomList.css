@@ -1,0 +1,27 @@
+/* src/assets/css/MessageRoomList.css */
+
+.message-room-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.message-room-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.message-room-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  display: block;
+}
+
+.message-room-item:hover {
+  background-color: #f0f0f0;
+}
