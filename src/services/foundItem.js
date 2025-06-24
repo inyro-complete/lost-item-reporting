@@ -5,6 +5,24 @@ import axiosInstance from './api/axiosInstance'
 import { USE_MOCK } from '../config'
 import { mockPostFoundItem } from './mockData'
 
+// 습득물 전체 목록 조회 (페이징)
+export const fetchFoundItemList = async (page, size) => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('토큰 없음')
+
+  const res = await axiosInstance.get('/api/found-items', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      page,
+      size,
+    },
+  })
+
+  return res.data
+}
+
 // 습득물 등록
 export const createFoundItem = async (data) => {
   if (USE_MOCK) {
@@ -18,13 +36,14 @@ export const createFoundItem = async (data) => {
   if (!token) throw new Error('토큰 없음')
 
   const formData = new FormData()
-  formData.append('itemName', data.title)
-  formData.append('itemDescription', data.content)
+  formData.append('title', data.title)
+  formData.append('description', data.content)
   formData.append('foundLocation', data.location)
-  formData.append('dateFound', data.date)
+  formData.append('storageLocation', data.location)  // 추가됨
+  formData.append('foundDate', data.foundDate)       // 이름 변경됨
   formData.append('status', data.status)
   if (data.file) {
-    formData.append('file', data.file)
+    formData.append('image', data.file)              // 이름 변경됨
   }
 
   const res = await axiosInstance.post('/api/found-items', formData, {
@@ -37,20 +56,20 @@ export const createFoundItem = async (data) => {
   return res.data
 }
 
-
 // 습득물 수정
 export const updateFoundItem = async (id, data) => {
   const token = localStorage.getItem('token')
   if (!token) throw new Error('토큰 없음')
 
   const formData = new FormData()
-  formData.append('itemName', data.title)
-  formData.append('itemDescription', data.content)
+  formData.append('title', data.title)
+  formData.append('description', data.content)
   formData.append('foundLocation', data.location)
-  formData.append('dateFound', data.date)
+  formData.append('storageLocation', data.location)  // 추가됨
+  formData.append('foundDate', data.foundDate)       // 이름 변경됨
   formData.append('status', data.status)
   if (data.file) {
-    formData.append('file', data.file)
+    formData.append('image', data.file)              // 이름 변경됨
   }
 
   try {
@@ -78,7 +97,7 @@ export const deleteFoundItem = async (id, token) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    return response.data  // ★ 여기 status가 아니라 data로
+    return response.data
   } catch (error) {
     if (error.response) {
       return error.response.data

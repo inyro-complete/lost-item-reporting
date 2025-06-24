@@ -7,8 +7,10 @@ export default function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('onSearch 타입:', typeof onSearch)
     onSearch(keyword)
   }
+
 
   return (
       <form onSubmit={handleSubmit} className="search-bar">

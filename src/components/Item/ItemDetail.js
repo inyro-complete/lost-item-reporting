@@ -17,6 +17,7 @@ export default function ItemDetail({ type }) {
             : `/api/found-items/${id}`
 
         const res = await axiosInstance.get(endpoint)
+        console.log('item data:', res.data)  // 여기 찍어보기
         setItem(res.data)
       } catch (err) {
         console.error('상세 정보 불러오기 실패', err)
@@ -25,6 +26,7 @@ export default function ItemDetail({ type }) {
 
     fetchItem()
   }, [id, type])
+
 
   if (!item) return <div>게시물을 찾을 수 없습니다.</div>
 
@@ -43,7 +45,10 @@ export default function ItemDetail({ type }) {
   const handleStartChat = async () => {
     try {
       const myUserId = Number(localStorage.getItem('userId'))
-      const otherUserId = item.userId // 상대방 ID라고 가정
+      const otherUserId = item.userId
+
+      console.log('My User ID:', myUserId)
+      console.log('Other User ID:', otherUserId)
 
       if (!myUserId || !otherUserId) {
         alert('유저 정보를 확인할 수 없습니다.')
@@ -58,6 +63,8 @@ export default function ItemDetail({ type }) {
     }
   }
 
+
+
   return (
       <div>
         <h2>{title}</h2>
@@ -66,11 +73,14 @@ export default function ItemDetail({ type }) {
             alt="이미지"
             style={{ width: '240px', height: '240px', objectFit: 'cover' }}
         />
-        <p>위치: {location}</p>
+        <p>잃어버린 위치: {location}</p>
         <p>날짜: {new Date(date).toLocaleDateString()}</p>
         <p>상태: {status}</p>
-        <p>내용: {description}</p>
-
+        <div>
+          <div
+              dangerouslySetInnerHTML={{ __html: description }}
+          />
+        </div>
         <button
             onClick={handleStartChat}
             style={{

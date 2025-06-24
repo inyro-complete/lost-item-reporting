@@ -36,13 +36,21 @@ export const getMyInfo = async () => {
   return res.data
 }
 
-// 회원 탈퇴
+// 탈퇴
 export const deleteUser = async (password) => {
-  const res = await axiosInstance.delete('/api/users/me', {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('토큰 없음')
+
+  const res = await axiosInstance.request({
+    url: '/api/users/me',
+    method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Authorization: `Bearer ${token}`,
     },
-    data: { password },
+    data: {
+      password,
+    },
   })
+
   return res.data
 }

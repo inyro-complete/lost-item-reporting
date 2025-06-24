@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FoundItemBoard from '../components/Item/FoundItemBoard'
 import SearchBar from '../components/SearchBar'
-import axiosInstance from '../services/api/axiosInstance'
+import { fetchFoundItemList } from '../services/foundItem.js'
 import '../assets/css/FoundItemPage.css'
 
 export default function FoundItemPage() {
@@ -15,29 +15,23 @@ export default function FoundItemPage() {
   const [totalPages, setTotalPages] = useState(1)
   const [keyword, setKeyword] = useState('')
 
-  const fetchItems = async () => {
-    try {
-      const res = await axiosInstance.get('/api/found-items', {
-        params: {
-          name: keyword,
-          page: page,
-          size: PAGE_SIZE,
-        }
-      })
-      setItems(res.data.content)
-      setTotalPages(res.data.pageable.totalPages)
-    } catch (error) {
-      console.error('습득물 목록 불러오기 실패', error)
-    }
-  }
-
   useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const data = await fetchFoundItemList(page - 1, PAGE_SIZE, keyword) // 페이지는 0부터 API에 요청
+        setItems(data.content) // API 응답 구조에 맞게 설정
+        setTotalPages(data.pageable.totalPages) // totalPages 위치 수정
+      } catch (error) {
+        console.error('아이템 불러오기 실패', error)
+      }
+    }
+
     fetchItems()
   }, [page, keyword])
 
   const handleSearch = (newKeyword) => {
     setKeyword(newKeyword)
-    setPage(1) // 검색 시 1페이지부터
+    setPage(1) // 검색어 바뀌면 1페이지로 초기화
   }
 
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)

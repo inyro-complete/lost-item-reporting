@@ -12,8 +12,11 @@ export default function LoginPage() {
     try {
       const data = await loginApi(email, password)
 
-      localStorage.setItem('token', data.accessToken)         // accessToken 저장
-      localStorage.setItem('refreshToken', data.refreshToken) // refreshToken도 저장
+      console.log('로그인 응답:', data)  // 여기에 찍어야 함
+
+      localStorage.setItem('token', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
+      localStorage.setItem('userId', data.userId)  // 이게 맞음
 
       navigate('/')
     } catch (e) {
@@ -21,6 +24,8 @@ export default function LoginPage() {
       console.error(e)
     }
   }
+
+
 
   return (
       <div className="loginPageWrapper">

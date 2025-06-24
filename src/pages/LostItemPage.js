@@ -1,10 +1,9 @@
-// src/pages/LostItemPage.js
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LostItemBoard from '../components/Item/LostItemBoard'
 import SearchBar from '../components/SearchBar'
-import axiosInstance from '../services/api/axiosInstance'
 import '../assets/css/LostItemPage.css'
+import { fetchLostItemList } from '../services/lostItem'
 
 export default function LostItemPage() {
   const navigate = useNavigate()
@@ -17,15 +16,9 @@ export default function LostItemPage() {
 
   const fetchItems = async () => {
     try {
-      const res = await axiosInstance.get('/api/lost-items', {
-        params: {
-          title: keyword,
-          page: page,
-          size: PAGE_SIZE,
-        }
-      })
-      setItems(res.data.content)
-      setTotalPages(res.data.totalPages)
+      const res = await fetchLostItemList(page + 1, PAGE_SIZE, keyword)
+      setItems(res.content)
+      setTotalPages(res.totalPages)
     } catch (error) {
       console.error('분실물 목록 불러오기 실패', error)
     }
@@ -36,9 +29,13 @@ export default function LostItemPage() {
   }, [page, keyword]) // 페이지나 검색어가 바뀔 때마다 다시 요청
 
   const handleSearch = (newKeyword) => {
+    console.log('검색어:', newKeyword)
     setKeyword(newKeyword)
-    setPage(0) // 검색 시 첫 페이지로
+    setPage(0)
   }
+
+
+  console.log('LostItemPage 렌더링, handleSearch 타입:', typeof handleSearch)
 
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i)
 

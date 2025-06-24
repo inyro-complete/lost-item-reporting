@@ -54,14 +54,18 @@ export default function ItemWrite({type}) {
       '찾기 완료' : 'FOUND'
     }
 
+    const formattedDate = date ? `${date}T00:00:00` : '';
+
     const data = {
       title,
-      date,
-      content,
-      location,
-      status: statusMap[status], // 매핑! "status라는 값에 대응하는 결과를 객체에서 바로 찾아옴"
+      content, // 실제로는 description
+      foundDate: formattedDate,
+      location, // foundLocation, storageLocation 둘 다에 씀
+      status: statusMap[status],
       file
     }
+
+
 
     {/* createLostItem, createFoundItem: API 함수. 각각 services/lostItem.js, service/foundItem.js*/}
     try {
@@ -72,12 +76,17 @@ export default function ItemWrite({type}) {
       }
 
       alert("등록이 완료되었습니다.")
-    } catch (error) {
-      console.log(error)
-      alert("등록에 실패하였습니다.")
-    }
+      navigate(-1)
 
-    navigate(-1)
+    } catch (error) {
+    console.error("서버 에러:", error)
+    console.log("응답 전문:", error.response)
+    alert(error.response?.data?.message || "등록 실패")
+  }
+
+
+
+  navigate(-1)
 
   }
   return (

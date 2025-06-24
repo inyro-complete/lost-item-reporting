@@ -1,11 +1,10 @@
 // src/services/lostItem.js
 
 import axiosInstance from './api/axiosInstance'
-
 import { USE_MOCK } from '../config'
 import { mockPostLostItem } from './mockData'
 
-// 분실물 등록
+// ✅ 분실물 등록
 export const createLostItem = async (data) => {
   if (USE_MOCK) {
     return {
@@ -18,12 +17,16 @@ export const createLostItem = async (data) => {
   if (!token) throw new Error('토큰 없음')
 
   const formData = new FormData()
-  formData.append('title', data.title) // 명세서 키
-  formData.append('description', data.content) // 명세서 키
-  formData.append('lostLocation', data.location) // 명세서 키
-  formData.append('lostDate', data.date) // 명세서 키
+  formData.append('title', data.title)
+  formData.append('description', data.content)
+  formData.append('lostLocation', data.location)
+  formData.append('lostDate', data.foundDate)
   if (data.file) {
-    formData.append('imageFile', data.file) // 명세서 키
+    formData.append('imageFile', data.file)
+  }
+
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ':', pair[1])
   }
 
   const res = await axiosInstance.post('/api/lost-items', formData, {
@@ -36,7 +39,26 @@ export const createLostItem = async (data) => {
   return res.data
 }
 
-// 글 삭제 함수
+// ✅ 분실물 전체 목록 조회 (명세서 기준: /api/lost-items/list)
+export const fetchLostItemList = async (page, size, title = '') => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('토큰 없음')
+
+  const res = await axiosInstance.get('/api/lost-items/list', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      page,
+      size,
+      title: title || undefined,
+    },
+  })
+
+  return res.data
+}
+
+// ✅ 분실물 삭제
 export const deleteLostItem = async (id, token) => {
   try {
     const response = await axiosInstance.delete(`/api/lost-items/${id}`, {
@@ -54,14 +76,14 @@ export const deleteLostItem = async (id, token) => {
   }
 }
 
-// 분실물 수정
+// ✅ 분실물 수정
 export const updateLostItem = async (id, data) => {
   const token = localStorage.getItem('token')
   if (!token) throw new Error('토큰 없음')
 
   const formData = new FormData()
   formData.append('title', data.title)
-  formData.append('description', data.content) // ItemWrite에서는 content라고 관리했음
+  formData.append('description', data.content)
   formData.append('lostLocation', data.location)
   formData.append('lostDate', data.date)
   if (data.file) {
